@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Ghait - Interactive CV</title>
+    <!-- Use Tailwind CSS for a professional and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use the Open Sans font for a clean, professional look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #0d1117; /* GitHub-like dark theme */
+            color: #c9d1d9; /* Light gray text color */
+            overflow-x: hidden; /* Prevents horizontal scrollbar from blur effect */
+        }
+        .container-card {
+            background-color: #161b22; /* Darker background for cards */
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            position: relative;
+            z-index: 10; /* Ensures cards are on top of the background */
+        }
+        .container-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+        }
+        .link-style {
+            color: #58a6ff; /* A vibrant blue for links */
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link-style:hover {
+            text-decoration: underline;
+        }
+        .navbar a {
+            color: #c9d1d9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #58a6ff;
+        }
+        
+        /* Blurry Neon Background */
+        .blurry-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vh;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.2), transparent 50%),
+                        radial-gradient(circle at 80% 90%, rgba(0, 255, 255, 0.2), transparent 50%);
+            animation: pulse-gradient 15s infinite alternate linear;
+            filter: blur(150px);
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes pulse-gradient {
+            from {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* Hero Text & Image Fade-in */
+        .hero-text-anim {
+            opacity: 0;
+            animation: fadeInTop 1s ease-in-out forwards;
+        }
+        
+        .hero-text-anim.delay-1 {
+            animation-delay: 0.5s;
+        }
+        
+        .hero-text-anim.delay-2 {
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInTop {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-fade-in {
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+            animation-delay: 1.5s; /* Delay after hero text appears */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll-triggered fade-in for cards */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- Blurry Background Element -->
+    <div class="blurry-background"></div>
+    
+    <!-- Hero Section with Navbar -->
+    <div class="max-w-6xl mx-auto mb-12">
+        <!-- Navbar -->
+        <nav class="flex justify-between items-center py-4 mb-10">
+            <span class="text-xl font-bold hero-text-anim">AryanG111</span>
+            <div class="space-x-8 hidden md:flex navbar hero-text-anim delay-1">
+                <a href="#projects">Projects</a>
+                <a href="https://github.com/AryanG111" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/aryan-ghait-b648112b3/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/aryanghait/" target="_blank">Instagram</a>
+            </div>
+            <!-- Mobile Menu button for later implementation if needed -->
+            <button class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Main Hero Content -->
+        <div class="flex flex-col md:flex-row items-center md:space-x-12">
+            <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 text-white leading-tight hero-text-anim delay-1">
+                    Hi I'm,<br>Aryan Ghait
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-400 hero-text-anim delay-2">
+                    Aspiring AI/ML Engineer | MCA Student at IMCC, Pune
+                </p>
+                <div class="mt-8 hero-text-anim delay-2">
+                    <a href="#projects" class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition">View My Work &rarr;</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center md:justify-end">
+                <!-- Laptop Placeholder with the provided image and a fade-in animation class -->
+                <img src="ChatGPT Image Aug 26, 2025, 01_56_26 PM.png" alt="Laptop showing portfolio projects with a neural network and data visualizations" class="rounded-lg shadow-2xl max-w-full h-auto transform hover:scale-105 transition-transform duration-500 image-fade-in" />
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto">
+        <!-- About Section -->
+        <section class="container-card scroll-fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-white">About</h2>
+            <p class="text-gray-400 leading-relaxed">
+                As a passionate MCA student at IMCC, Pune, I am dedicated to building a career in Artificial Intelligence and Machine Learning. I possess a strong foundation in programming, data structures, and algorithms, and I am currently focused on expanding my expertise in machine learning concepts, including deep learning and data science. I am a quick learner and a proactive team player, eager to contribute my skills to impactful projects and solve complex, real-world problems.
+            </p>
+        </section>
+
+        <!-- Education Section -->
+        <section class="container-card scroll-fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-white">Education</h2>
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-300">Master of Computer Applications (MCA)</h3>
+                <p class="text-gray-500">IMCC, Pune | 2025 - 2027</p>
+                <p class="text-gray-400 mt-1">Personal Focus: Artificial Intelligence & Machine Learning</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-300">Bachelor's Degree in Computer Applications</h3>
+                <p class="text-gray-500">Sant Gadge Baba Amravati University | 2021 - 2024</p>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="container-card scroll-fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-white">Certifications</h2>
+            <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-300">Machine Learning Certification</h3>
+                <p class="text-gray-500">Internshala</p>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section class="container-card scroll-fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-white">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-semibold text-gray-300">Programming Languages:</h4>
+                    <p class="text-gray-400">Python, Java, C++, C</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-300">AI/ML Frameworks:</h4>
+                    <p class="text-gray-400">TensorFlow, PyTorch, Scikit-learn</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-300">Libraries:</h4>
+                    <p class="text-gray-400">NumPy, Pandas, Matplotlib, Seaborn</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-300">Databases:</h4>
+                    <p class="text-gray-400">SQL, MongoDB</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-300">Tools & Platforms:</h4>
+                    <p class="text-gray-400">Git, GitHub, Jupyter Notebooks, Kaggle</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container-card scroll-fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-white">Projects</h2>
+            <div class="space-y-6">
+                <!-- Project 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-300">Housing price Prediction</h3>
+                    <p class="text-gray-500 mb-2">This project develops a machine learning model to predict housing prices using a dataset of various features. It demonstrates a complete end-to-end data science workflow, from data cleaning and preprocessing to model training and evaluation. The goal is to build a robust and accurate model that can provide valuable insights into the factors influencing home values..</p>
+                    <a href="https://github.com/AryanG111/-Housing-Price-Prediction-Model" target="_blank" class="link-style">https://github.com/AryanG111/-Housing-Price-Prediction-Model &rarr;</a>
+                </div>
+                <!-- Project 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-300">Project Title 2</h3>
+                    <p class="text-gray-500 mb-2">Describe this project, the problem it solves, and the skills you applied.</p>
+                    <a href="https://github.com/yourusername/project2" target="_blank" class="link-style">View on GitHub &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll-triggered animations for cards
+            const fadeElements = document.querySelectorAll('.scroll-fade-in');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
